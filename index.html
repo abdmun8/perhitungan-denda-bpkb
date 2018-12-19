@@ -5,13 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Perhitungan Denda BPKB</title>
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Perhitungan Denda Penyimpanan BPKB</title>
   <!-- Font -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Date Picker -->
-  <link href="css/daterangepicker.css" rel="stylesheet">  
   <link href="css/material-bootstrap-datepicker.css" rel="stylesheet">  
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,21 +17,28 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.css" rel="stylesheet">
   <script type="text/javascript" src="js/moment-with-locale.js"></script>
-
 </head>
 
 <body>
+  <!-- Loading animation -->
+  <div class="preloader">
+    <div class="preloader-animation">
+      <div class="dot1"></div>
+      <div class="dot2"></div>
+    </div>
+  </div>
+  <!-- /Loading animation -->
 
   <!-- Start your project here-->
   
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-sm-12">
-        <!-- Material form login -->
-        <div class="card" style="margin-top: 10px;">
+        <!-- Card -->
+        <div class="card" style="margin: 10px 0px 10px 0px;">
 
-          <h5 class="card-header primary-color white-text text-center py-4">
-            <strong>Perhitungan Denda BPKB</strong>
+          <h5 class="card-header primary-color-dark white-text text-center py-4">
+            <strong>Denda Penyimpanan BPKB</strong>
           </h5>
 
           <!--Card content-->
@@ -65,22 +69,22 @@
                 <label for="tgl-pengambilan">Tgl Pengambilan</label>
               </div>
 
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="ada-denda">
-                <label class="form-check-label" for="ada-denda">Ada Denda</label>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="ada-denda">
+                <label class="custom-control-label" for="ada-denda">Ada Denda BPKB?</label>
               </div>
 
               <!-- Tgl Pengambilan -->
               <div class="md-form" id="input-denda">
-                <label for="denda">Denda (Rp)</label>
-                <input type="number" id="denda" class="form-control" value="0">
+                <label for="denda">Denda (IDR)</label>
+                <input type="text" id="denda" class="form-control">
               </div>
 
               <!-- Sign in button -->
-              <button class="btn btn-primary btn-rounded btn-block my-4 waves-effect z-depth-0" type="button" id="btn-hitung" onclick="hitungDenda();">Hitung</button>
-
-              <button class="btn btn-light btn-rounded btn-block my-4 waves-effect z-depth-0" type="button" id="btn-reset" onclick="resetForm();">Reset</button>
-
+              <div class="row d-flex justify-content-around">
+                  <button class="btn primary-color-dark white-text btn-rounded my-4 waves-effect z-depth-0" type="button" id="btn-hitung" onclick="hitungDenda();">Hitung</button>
+                  <button class="btn btn-light btn-rounded my-4 waves-effect z-depth-0" type="button" id="btn-reset" onclick="resetForm();">Reset</button>
+              </div>
             </form>
             <!-- Form -->
           </div>
@@ -93,28 +97,22 @@
                 <small>Denda BPKB: <span id="denda-bpkb"></span></small><br>
                 <small>Jumlah Hari: <span id="jml-hari"></span></small><br>
                 <small>Denda / hari: <span id="denda-hari"></span></small><br>
-                <strong>Denda Penyimpanan BPKB: <span id="denda-rp"></span></strong><br>
-                <strong>Denda yang harus dibayar: <span id="denda-bayar"></span></strong><br>
+                <strong><small><b>Denda Penyimpanan + Denda BPKB:</b></small> <span id="denda-rp"></span></strong><br>
+                <strong><small><b>Denda yang harus dibayar:</b></small> <span id="denda-bayar"></span></strong><br>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>  
             </div>
-            <!-- <div class="alert alert-primary alert-dismissible fade show" role="alert">
-              <strong>Info</strong><br> 
-              <small>- Denda berlaku > 30 hr dr tgl pengambilan</small><br>
-              <small>- Motor 2000 / Hari</small><br>
-              <small>- Mobil 5000 / Hari</small>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>   -->
           </div>
           
 
         </div>
         <!-- Material form login -->
     </div>
+  </div>
+  <div class="footer">
+    <p>&copy; <u><a href="https://abdmun8.github.io" style="text-decoration: none;color: black;">abdmun8</a></u> <span id="year"></span></p>
   </div>
   <!-- /Start your project here-->
 
@@ -124,25 +122,35 @@
   <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="js/popper.min.js"></script>
   <!-- Daterangepicker -->
-  <script type="text/javascript" src="js/daterangepicker.js"></script>
   <script type="text/javascript" src="js/material-bootstrap-datepicker.js"></script>  
   <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
+  <!-- Jquery Mask -->
+  <script type="text/javascript" src="js/jquery.mask.js"></script>
   <script>
     $(document).ready(function(){
+      $(".preloader").fadeOut("slow");
       $("#input-denda").hide();
-      $("#btn-reset").hide();
       $("#hasil").hide();
+      $('#denda').mask('000.000.000.000.000', {reverse: true});
       datePicker();
+      var dt = new Date;
+      $("#year").text(dt.getFullYear());
     });
+
+    const formatter = new Intl.NumberFormat('en-ID', { 
+      style: 'currency', 
+      currency: 'IDR' 
+    })
+    // new Intl.NumberFormat('en-ID', { style: 'currency', currency: 'IDR' }).format(number)
 
     $("#ada-denda").change(function(){
       var denda = $("#ada-denda").prop("checked");
-      $("#input-denda").val(0);
+      $("#denda").val("");
       if(denda){
-        $("#input-denda").show();
+        $("#input-denda").show("slow");
       }else{
         $("#input-denda").hide("slow");
       }
@@ -165,23 +173,28 @@
       }
 
       if(tipeDenda == 'motor'){
-        hargaDenda = 2500;
+        hargaDenda = 2000;
       }else{
         hargaDenda = 5000;
       }
       if(adaDenda){
-        denda = ($("#denda").val() * 1);
+        denda = ($('#denda').cleanVal() * 1);
       }
-      var totDay =  date_diff_indays(tglLunas, tglAmbil) * 1;
+      var totDay =  date_diff_indays(tglLunas, tglAmbil);
+      if(totDay == false){
+        alert("Tanggal Pengambilan tidak boleh < tgl Pelunasan!");
+        return;
+      }
+      totDay = totDay * 1;
 
       if(totDay > 30){
         hariHitung = totDay - 30;
-        totalDenda = hariHitung * hargaDenda;
+        totalDenda = (hariHitung * hargaDenda) + denda;
         totalBayar = totalDenda;
 
         if(tipeDenda == 'motor' && totalDenda > 2500000){
           totalBayar = 2500000;
-        }else if(tipeDenda == 'motor' && totalDenda > 5000000){
+        }else if(tipeDenda == 'mobil' && totalDenda > 5000000){
           totalBayar = 5000000;
         }
 
@@ -193,11 +206,11 @@
       }
       
 
-      $("#denda-bpkb").text(denda);
-      $("#denda-hari").text(hargaDenda);
+      $("#denda-bpkb").text(formatter.format(denda));
+      $("#denda-hari").text(formatter.format(hargaDenda));
       $("#jml-hari").text(hariHitung);
-      $("#denda-rp").text(totalDenda);
-      $("#denda-bayar").text(totalBayar);
+      $("#denda-rp").text(formatter.format(totalDenda));
+      $("#denda-bayar").text(formatter.format(totalBayar));
       $("#btn-reset").show("slow");
       $("#hasil").show("slow");
     }
@@ -206,26 +219,23 @@
       dt1 = new Date(date1);
       dt2 = new Date(date2);
 
-      if(dt2 < dt1){
-        alert("Tanggal ambil tidak boleh < tgl Lunas!");
-        return;
+      if(dt2 < dt1){        
+        return false;
       }
       return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate()) ) /(1000 * 60 * 60 * 24));
     }
 
     function datePicker () {
       if ($('.daterangepicker').length) {
-        // $('.daterangepicker').datepicker();
         $('.daterangepicker').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
       }
     }
 
     function resetForm(){
-      $("#denda-bpkb").text("Rp. 0");
-      $("#denda-hari").text("Rp. 2500");
-      $("#jml-hari").text("Rp. 0");
-      $("#denda-rp").text("Rp. 0");
-      $("#btn-reset").hide("slow");
+      $("#denda-bpkb").text("");
+      $("#denda-hari").text("");
+      $("#jml-hari").text("");
+      $("#denda-rp").text("");
       $("#hasil").hide("slow");
       $("#form-denda")[0].reset();
     }

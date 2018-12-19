@@ -208,9 +208,9 @@
                   this.midYear=y;
                   var yearHtml =
                       '<div class="dtp-picker-year hidden" >' +
-                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
+                      '<div><a href="javascript:void(0);" class="btn btn-primary dtp-select-year-range before" style="margin: 0;"><i class="material-icons">keyboard_arrow_up</i></a></div>' +
                       yearPicker +
-                      '<div><a href="javascript:void(0);" class="btn btn-default dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
+                      '<div><a href="javascript:void(0);" class="btn btn-primary dtp-select-year-range after" style="margin: 0;"><i class="material-icons">keyboard_arrow_down</i></a></div>' +
                       '</div>';
 
                  this.template = '<div class="dtp hidden" id="' + this.name + '">' +
