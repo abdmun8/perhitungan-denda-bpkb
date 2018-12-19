@@ -198,8 +198,6 @@
           totalBayar = 5000000;
         }
 
-        totalBayar = totalBayar + denda;
-
       }else{
         totalDenda = denda;
         totalBayar = denda;
@@ -237,6 +235,7 @@
       $("#jml-hari").text("");
       $("#denda-rp").text("");
       $("#hasil").hide("slow");
+      $("#input-denda").hide("slow");
       $("#form-denda")[0].reset();
     }
   </script>
